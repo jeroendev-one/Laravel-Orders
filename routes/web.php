@@ -14,5 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/orderlist', 'OrderController@listOrder')->name('listOrder');
+Route::get('/mijn-bestellingen', 'OrderController@myOrders')->name('myOrders');
+Route::get('/alle-bestellingen', 'OrderController@allOrders')->name('allOrders');
+
+
+Auth::routes();
 Route::post('/order', 'OrderController@createOrder')->name('order');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

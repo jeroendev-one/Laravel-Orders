@@ -1,5 +1,3 @@
-Naam:<br>
-{{ $request->input('naam') }} <br>
+Naam: {{ $request->input('naam') }}
 
-Bestelling: <br>
-{{ $request->input('bestelling') }} <br>
+Bestelling: {{ $request->input('bestelling') }}
