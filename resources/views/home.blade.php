@@ -16,9 +16,9 @@
 
             <div class="form-group"><input class="form-control" name="bestelling" placeholder="Bestelling" rows="14" oninvalid="this.setCustomValidity('Voer je bestelling in')" required></textarea></div>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit"><i class="fas fa-check-circle"></i>&nbsp;bestelling plaatsen</button></div>
-            @if(!empty($successMsg))
+            @if(session()->has('message'))
             <div class="alert alert-success" role="alert">
-            {{ $successMsg }}
+            {{ session()->get('message') }}
             </div>
             @endif
             <a href="{{ route('listOrder') }}">Bestellijst vandaag</a>

@@ -31,8 +31,8 @@ class OrderController extends Controller
         
         Mail::to($request->email)->send(new OrderNotification($request));
 
-        return view('home')->with([
-            'successMsg' => 'Je bestelling is doorgegeven!'
+        return redirect()->back()->with([
+            'message' => 'Je bestelling is doorgegeven!'
         ]);
 
         

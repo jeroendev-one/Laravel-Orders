@@ -1,5 +1,5 @@
 Naam:<br>
-{{ $request->input('naam') }}
+{{ $request->input('naam') }} <br>
 
 Bestelling: <br>
-{{ $request->input('bestelling') }}
+{{ $request->input('bestelling') }} <br>
