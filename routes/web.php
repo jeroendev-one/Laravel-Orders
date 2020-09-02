@@ -22,6 +22,8 @@ Auth::routes();
 Route::post('/order', 'OrderController@createOrder')->name('order');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Admin routes
+Route::get('/admin', 'AdminController@admin')->middleware('is_admin')->name('admin');
+Route::get('/admin/users', 'AdminController@users')->middleware('is_admin')->name('users');
+Route::get('/admin/users/delete/{{ user }}', 'AdminController@deleteUser')->middleware('is_admin')->name('deleteUser');

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderNotification;
 use App\Order;
+use App\User;
 
 class OrderController extends Controller
 {
@@ -15,7 +16,6 @@ class OrderController extends Controller
         $this->middleware('auth');
         $this->dateExact = date('d-m-Y H:i');
         $this->date = date('d-m-Y');
-        $this->user = Auth::user();
     }
 
     protected function createOrder(Request $request)
@@ -43,8 +43,9 @@ class OrderController extends Controller
 
     public function myOrders()
     {
+        $user = Auth::user()->name;
 
-        $orders = Order::where('naam', 'like', '%' . $this->user . '%')->get();
+        $orders = Order::all()->where('naam', $user);
 
         return view('auth.orderslist')->with([
             'orders' => $orders,

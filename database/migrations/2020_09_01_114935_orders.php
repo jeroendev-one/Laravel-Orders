@@ -19,7 +19,7 @@ class Orders extends Migration
             $table->string('email');
             $table->string('bestelling');
             $table->string('restaurant');
-            $table->integer('amount')->default(0);
+            $table->string('amount')->default(0);
             $table->string('datum');
         });
     }

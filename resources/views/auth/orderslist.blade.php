@@ -2,9 +2,7 @@
 @section('title', '- Order lijst')
 @section('content')
 <div class="container">
-    <br>
-    <h2>{{ $date }}</h2>
-    <br>
+
     <table class="table table-light table-bordered">
         <thead class="thead-dark" style="border-color: #dee2e6;!important">
             <tr>
@@ -13,6 +11,8 @@
                 <th scope="col"> Bestelling </th>
                 <th scope="col"> Bedrag </th>
                 <th scope="col"> PayPal </th>
+                <th scope="col"> Tikkie </th>
+                <th scope="col"> Datum </th>
             </tr>
         </thead>
         <tbody>
@@ -26,8 +26,10 @@
                         <td> -- </td>
                     @else
                         <td>&euro; {{ $order->amount }}</td>
-                        <td><a href="https://paypal.me/jeroendv9/{{ $order->amount }}"></a></td>
+                        <td><a href="{{ env('PAYPAL_LINK') }}/{{ $order->amount }}">Link</a></td>
+                        <td><a href="{{ env('TIKKIE_LINK') }}">Link</a></td>
                     @endif
+                    <td>{{ $order->datum }}</td>
             @endforeach
             </tr>
 
