@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Order;
 
 class OrderNotification extends Mailable
 {
@@ -20,10 +21,12 @@ class OrderNotification extends Mailable
     protected $request;
     public $subject;
 
-    public function __construct(Request $request)
+    public function __construct(Order $order, string $tikkieLink, string $paypalLink)
     {
 
-        $this->request = $request;
+        $this->order = $order;
+        $this->paypalLink = $paypalLink;
+        $this->tikkieLink = $tikkieLink;
 
     }
 
@@ -35,10 +38,17 @@ class OrderNotification extends Mailable
     public function build()
     {
         $date = date('d-m');
-        $restaurant = $this->request['restaurant'];
+        $restaurant = $this->order['restaurant'];
 
-        return $this->view('mail')->subject("Je bestelling van $date bij $restaurant")->from(env('MAIL_FROM_ADDRESS'), 'Order system')->with([
-            'request' => $this->request
+        //dd($this->order->naam);
+        $amount = Order::select('amount')->where('bestelling', $this->order->bestelling)->value('amount');
+        //dd($amount);
+
+        return $this->view('mail.order')->subject("Bevestiging bestelling $date bij $restaurant")->from(env('MAIL_FROM_ADDRESS'), 'Order system')->with([
+            'order' => $this->order,
+            'amount' => $amount,
+            'tikkieLink' => $this->tikkieLink,
+            'paypalLink' => $this->paypalLink
         ]);
 
     }

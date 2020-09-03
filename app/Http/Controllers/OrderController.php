@@ -27,12 +27,10 @@ class OrderController extends Controller
             'email' => $request['email'],
             'bestelling' => $request['bestelling'],
             'restaurant' => $request['restaurant'],
-            'datum' => $this->dateExact
+            'datum' => $this->date
         ];
 
         Order::create($order);
-
-        Mail::to($request->email)->send(new OrderNotification($request));
 
         return redirect()->back()->with([
             'message' => 'Je bestelling is doorgegeven!'

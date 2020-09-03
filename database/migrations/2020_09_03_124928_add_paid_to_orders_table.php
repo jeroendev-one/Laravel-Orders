@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeType extends Migration
+class AddPaidToOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class ChangeType extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function ($table) {
-        $table->integer('amount')->default(0)->change();
-    });
+        Schema::table('orders', function (Blueprint $table) {
+            $table->boolean('paid')->default(0)->change();
+        });
     }
 
     /**
@@ -25,6 +25,8 @@ class ChangeType extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('orders', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -16,6 +16,7 @@
                         <option value="">Restaurant</option>
                         <option value="De Broodbode">De Broodbode</option>
                         <option value="De Waag">De Waag</option>
+                        <option value="Dominos">Dominos</option>
                     </select>
                 </div>
 

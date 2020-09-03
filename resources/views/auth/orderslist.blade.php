@@ -10,8 +10,7 @@
                 <th scope="col"> Restaurant </th>
                 <th scope="col"> Bestelling </th>
                 <th scope="col"> Bedrag </th>
-                <th scope="col"> PayPal </th>
-                <th scope="col"> Tikkie </th>
+                <th scope="col"> Betaald </th>
                 <th scope="col"> Datum </th>
             </tr>
         </thead>
@@ -21,17 +20,15 @@
                     <td scope="row">{{ $order->naam }}</td>
                     <td>{{ $order->restaurant }}</td>
                     <td>{{ $order->bestelling }}</td>
-                    @if($order->amount == 0)
-                        <td> -- </td>
-                        <td> -- </td>
+                    <td>&euro; {{ $order->amount }}</td>
+                    @if ($order->paid == '0')
+                    <td><i class="fa fa-window-close"></i></td>
                     @else
-                        <td>&euro; {{ $order->amount }}</td>
-                        <td><a href="{{ env('PAYPAL_LINK') }}/{{ $order->amount }}">Link</a></td>
-                        <td><a href="{{ env('TIKKIE_LINK') }}">Link</a></td>
+                    <td><i class="fas fa-check"></i></td>
                     @endif
                     <td>{{ $order->datum }}</td>
             @endforeach
-            </tr>
+                </tr>
 
         </tbody>
     </table>

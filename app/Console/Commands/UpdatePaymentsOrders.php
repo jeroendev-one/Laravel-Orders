@@ -3,23 +3,22 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Order;
 
-class ListOrders extends Command
+class UpdatePaymentsOrders extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'orders:list';
+    protected $signature = 'orders:updatepayments';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'List all orders';
+    protected $description = 'Update the payments for the orders';
 
     /**
      * Create a new command instance.
@@ -38,9 +37,6 @@ class ListOrders extends Command
      */
     public function handle()
     {
-        $orders = Order::all();
-
-
-        
+        return 0;
     }
 }

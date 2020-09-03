@@ -21,6 +21,7 @@ class Orders extends Migration
             $table->string('restaurant');
             $table->string('amount')->default(0);
             $table->string('datum');
+            $table->timestamps();
         });
     }
 
