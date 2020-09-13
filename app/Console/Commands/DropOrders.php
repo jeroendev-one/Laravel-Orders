@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Order;
+use App\Models\Order;
 
 class DropOrders extends Command
 {

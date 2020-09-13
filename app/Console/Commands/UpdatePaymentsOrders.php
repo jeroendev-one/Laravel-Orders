@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\Order;
 
 class UpdatePaymentsOrders extends Command
 {
@@ -37,6 +38,14 @@ class UpdatePaymentsOrders extends Command
      */
     public function handle()
     {
-        return 0;
+        $orders = Order::where('paid', '=', '0')->get();
+        
+        foreach ($orders as $order) {
+                $this->line(' Naam: ' . $order->name);
+                $this->line(' Bestelling: ' . $order->bestelling);
+                if ($this->confirm('Betaald?')) {
+                    Order::where('bestelling', '=', $order->bestelling)->update(['paid' => '1']);
+                }
+            }
     }
 }

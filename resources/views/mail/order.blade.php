@@ -3,7 +3,7 @@ Restaurant: {{ $order->restaurant }}
 <br>
 Bestelling: {{ $order->bestelling }}
 <br>
-Bedrag: {{ $amount }}
+Bedrag: &euro; {{ $amount }}
 
 <hr>
 <h3> Betaal links </h3>

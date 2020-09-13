@@ -13,17 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/mijn-bestellingen', 'OrderController@myOrders')->name('myOrders');
-Route::get('/alle-bestellingen', 'OrderController@allOrders')->name('allOrders');
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+    return redirect('/dashboard');
+})->name('dashboard');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
-Auth::routes();
-Route::post('/order', 'OrderController@createOrder')->name('order');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth:sanctum', 'verified'])->get('/order', function () {
+    return view('pages.order');
+})->name('order');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/order-list', function () {
+    return view('pages.order-list');
+})->name('order-list');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/my-orders', function () {
+    return view('pages.order-list');
+})->name('my-orders');
 
 
 // Admin routes
-Route::get('/admin', 'AdminController@admin')->middleware('is_admin')->name('admin');
-Route::get('/admin/users', 'AdminController@users')->middleware('is_admin')->name('users');
-Route::get('/admin/users/delete/{{ user }}', 'AdminController@deleteUser')->middleware('is_admin')->name('deleteUser');
+Route::middleware('is_admin')->get('/admin/users', function () {
+    return view('admin.users');
+})->name('admin-users');

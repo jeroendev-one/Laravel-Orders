@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Mail\OrderNotification;
 use Illuminate\Support\Facades\Mail;
-use App\Order;
+use App\Models\Order;
 
 class InsertPricesOrders extends Command
 {
@@ -46,10 +46,10 @@ class InsertPricesOrders extends Command
 
         foreach ($orders as $order) {
 
-            $this->line(' Naam: ' . $order->naam);
+            $this->line(' Naam: ' . $order->name);
             $this->line(' Bestelling: ' . $order->bestelling);
             $price = $this->ask('Bedrag');
-            $query = Order::where('bestelling', '=', $order->bestelling)->update(['amount' => $price]);
+            Order::where('bestelling', '=', $order->bestelling)->update(['amount' => $price]);
             Mail::to($order->email)->send(new OrderNotification($order, $tikkieLink, $paypalLink));
 
         }

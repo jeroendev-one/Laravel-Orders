@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Order;
+use App\Models\Order;
 
 class OrderNotification extends Mailable
 {
@@ -44,7 +44,7 @@ class OrderNotification extends Mailable
         $amount = Order::select('amount')->where('bestelling', $this->order->bestelling)->value('amount');
         //dd($amount);
 
-        return $this->view('mail.order')->subject("Bevestiging bestelling $date bij $restaurant")->from(env('MAIL_FROM_ADDRESS'), 'Order system')->with([
+        return $this->view('mail.order')->subject("Bevestiging bestelling $date bij $restaurant")->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'))->with([
             'order' => $this->order,
             'amount' => $amount,
             'tikkieLink' => $this->tikkieLink,

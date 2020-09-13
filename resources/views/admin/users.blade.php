@@ -1,27 +1,14 @@
-@extends('layouts.app')
-@section('title', '- User management')
-@section('content')
-<div class="container">
-
-    <table class="table table-light table-bordered">
-        <thead class="thead-dark" style="border-color: #dee2e6;!important">
-            <tr>
-                <th scope="col">Naam</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($users as $user)
-                <tr>
-                    <td scope="row">{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->type }}</td>
-                    <td><a href="{{ route('deleteUser', [ "user" => $user->name]) }}"><i class="fas fa-trash-alt"></i></a></td>
-            @endforeach
-            </tr>
-
-        </tbody>
-    </table>
-</div>
-@endsection
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Order list
+        </h2>
+    </x-slot>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            @livewire('admin.users')
+            </div>
+        </div>
+    </div> 
+</x-app-layout>

@@ -15,11 +15,12 @@ class Orders extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('naam');
+            $table->string('name');
             $table->string('email');
             $table->string('bestelling');
             $table->string('restaurant');
             $table->string('amount')->default(0);
+            $table->boolean('paid')->default(0);
             $table->string('datum');
             $table->timestamps();
         });
