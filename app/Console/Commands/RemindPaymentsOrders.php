@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RemindNotification;
 use App\Models\Order;
 use Carbon\Carbon;
 
@@ -30,6 +32,7 @@ class RemindPaymentsOrders extends Command
     public function __construct()
     {
         parent::__construct();
+	$this->paypalLink = env('PAYPAL_LINK');
     }
 
     /**
@@ -39,7 +42,13 @@ class RemindPaymentsOrders extends Command
      */
     public function handle()
     {
-        $oldpayments = Order::all()->whereDate('datum', '=', date('Y-m-d'));
-        dd($oldpayments);
+
+	$paypalLink = env('PAYPAL_LINK');
+
+	$oldpayments = Order::where('paid', false)->get();
+
+	foreach ($oldpayments as $order) {
+	Mail::to($order->email)->send(new RemindNotification($order, $paypalLink));
+	}
     }
 }

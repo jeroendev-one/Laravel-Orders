@@ -25,7 +25,7 @@
             <nav x-data="{ open: false }" class="bg-white-500">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
+                    <div class="flex items-center justify-between flex-wrap p-6">
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
@@ -40,7 +40,7 @@
                                     Dashboard
                                 </x-jet-nav-link>
                             </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div class="border-black -hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <x-jet-nav-link  href="/order" :active="request()->routeIs('order')">
                                     Order
                                 </x-jet-nav-link>
@@ -75,14 +75,27 @@
                                         My Orders
                                     </x-jet-dropdown-link>
 
-                                    @if(Auth::user()->type == 'admin')
                                     <!-- Admin Management -->
+                                    @if(Auth::user()->type == 'admin')
+                                    
                                     <div class="border-t border-gray-100"></div>
                                     <div class="block px-4 py-2 text-xs text-gray-400">
                                         Admin routes
                                     </div>
                                     <x-jet-dropdown-link href="/admin/users">
                                         User management
+                                    </x-jet-dropdown-link>
+
+                                    <x-jet-dropdown-link href="/admin/orders">
+                                        Order management
+                                    </x-jet-dropdown-link>
+
+                                    <x-jet-dropdown-link href="/admin/restaurants/list">
+                                        Restaurant List
+                                    </x-jet-dropdown-link>
+
+                                    <x-jet-dropdown-link href="/admin/restaurants/add">
+                                        Restaurant Add
                                     </x-jet-dropdown-link>
                                     @endif
                                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -125,6 +138,7 @@
                         <x-jet-responsive-nav-link href="/dashboard" :active="request()->routeIs('dashboard')">
                             Dashboard
                         </x-jet-responsive-nav-link>
+
                         <x-jet-responsive-nav-link  href="/order" :active="request()->routeIs('order')">
                             Order
                         </x-jet-responsive-nav-link>
@@ -132,6 +146,27 @@
                         <x-jet-responsive-nav-link  href="/order-list" :active="request()->routeIs('order-list')">
                             List
                         </x-jet-responsive-nav-link>
+
+                        <!-- Admin Menu -->
+                        @if(Auth::user()->type == 'admin')
+                        
+                        <x-jet-responsive-nav-link  href="/admin/users" :active="request()->routeIs('admin-users')">
+                            User management
+                        </x-jet-responsive-nav-link>
+
+                        <x-jet-responsive-nav-link  href="/admin/orders" :active="request()->routeIs('admin-orders')">
+                            Order management
+                        </x-jet-responsive-nav-link>
+
+                        <x-jet-responsive-nav-link  href="/admin/restaurants/list" :active="request()->routeIs('admin-restaurants-list')">
+                            Restaurants list
+                        </x-jet-responsive-nav-link>
+
+                        <x-jet-responsive-nav-link  href="/admin/restaurants/add" :active="request()->routeIs('admin-restaurants-form')">
+                            Restaurants add
+                        </x-jet-responsive-nav-link>
+                        @endif
+                        <!-- End Admin Menu -->
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -177,7 +212,7 @@
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow">
+            <header class="bg-teal-200 shadow text-white">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>

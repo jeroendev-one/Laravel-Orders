@@ -20,6 +20,7 @@ class Orders extends Migration
             $table->string('bestelling');
             $table->string('restaurant');
             $table->string('amount')->default(0);
+	        $table->string('tikkielink')->nullable();
             $table->boolean('paid')->default(0);
             $table->string('datum');
             $table->timestamps();

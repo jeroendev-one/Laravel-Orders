@@ -44,7 +44,7 @@ class UpdatePaymentsOrders extends Command
                 $this->line(' Naam: ' . $order->name);
                 $this->line(' Bestelling: ' . $order->bestelling);
                 if ($this->confirm('Betaald?')) {
-                    Order::where('bestelling', '=', $order->bestelling)->update(['paid' => '1']);
+                    Order::where('id', $order->id)->update(['paid' => 1]);
                 }
             }
     }

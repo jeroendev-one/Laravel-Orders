@@ -21,11 +21,11 @@ class OrderNotification extends Mailable
     protected $request;
     public $subject;
 
-    public function __construct(Order $order, string $tikkieLink, string $paypalLink)
+    public function __construct(Order $order, string $tikkieLink)
     {
 
         $this->order = $order;
-        $this->paypalLink = $paypalLink;
+        $this->paypalLink = env('PAYPAL_LINK');
         $this->tikkieLink = $tikkieLink;
 
     }
@@ -40,9 +40,7 @@ class OrderNotification extends Mailable
         $date = date('d-m');
         $restaurant = $this->order['restaurant'];
 
-        //dd($this->order->naam);
         $amount = Order::select('amount')->where('bestelling', $this->order->bestelling)->value('amount');
-        //dd($amount);
 
         return $this->view('mail.order')->subject("Bevestiging bestelling $date bij $restaurant")->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'))->with([
             'order' => $this->order,

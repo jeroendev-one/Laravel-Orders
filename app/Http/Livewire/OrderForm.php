@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Order;
+use App\Models\Restaurant;
+use Carbon\Carbon;
 
 class OrderForm extends Component
 {
@@ -13,7 +15,8 @@ class OrderForm extends Component
     public $bestelling;
   
     public function submit()
-    {
+    {  
+
         $order = [
             'name' => auth()->user()->name,
             'email' => auth()->user()->email,
@@ -26,11 +29,16 @@ class OrderForm extends Component
 
         $this->reset('bestelling', 'restaurant');
         
-        session()->flash('message', 'Bestelling doorgegeven!');
+        session()->flash('successMessage', "Bestelling doorgegeven! Mocht je hem willen wijzigen, ga dan naar My Orders");
     }
   
     public function render()
     {
-        return view('livewire.order-form');
+
+        $restaurants = Restaurant::all();
+
+        return view('livewire.order-form', [
+            'restaurants' => $restaurants
+        ]);
     }
 }

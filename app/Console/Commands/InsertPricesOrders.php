@@ -49,7 +49,12 @@ class InsertPricesOrders extends Command
             $this->line(' Naam: ' . $order->name);
             $this->line(' Bestelling: ' . $order->bestelling);
             $price = $this->ask('Bedrag');
+
+	    // Update queries
             Order::where('bestelling', '=', $order->bestelling)->update(['amount' => $price]);
+	    Order::where('bestelling', '=', $order->bestelling)->update(['tikkielink' => $tikkieLink]);
+
+	    // Mail
             Mail::to($order->email)->send(new OrderNotification($order, $tikkieLink, $paypalLink));
 
         }

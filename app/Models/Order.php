@@ -14,6 +14,8 @@ class Order extends Model
         'paid' => 'boolean'
     ];
 
-    protected $fillable = [ "id", "name", "email", "bestelling", "restaurant", "amount", "datum" ];
+    protected $fillable = [ 
+        'id', 'name', 'email', 'bestelling', 'restaurant', 'amount', 'paid', 'datum', 'tikkielink'
+    ];
 
 }
