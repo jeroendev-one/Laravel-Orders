@@ -8,7 +8,7 @@
             <select name="date" wire:model="date" class="p-2 px-4 py-2 pr-8 leading-tight bg-blue border border-gray-400 rounded shadow appearance-none hover: focus:outline-none focus:shadow-outline">
                 <option value=''>Choose a date</option>
                 @foreach($orderDates as $date)
-                <option value={{ $date }}>{{ $date }}</option>
+                <option value={{ $date }}>{{ $date}}</option>
                 @endforeach
             </select>
 
@@ -23,7 +23,7 @@
 </div>
 
 <div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
-    <table class="min-w-full">
+    <table class="min-w-full table-fixed">
         <thead>
             <tr>
                 <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Naam</th>
@@ -65,7 +65,8 @@
                 <button onclick="confirm('Are you sure you want to delete this order?') || event.stopImmediatePropagation()" wire:click="deleteOrder({{ $order->id }})" class="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none">Delete</button>
                 </td>
                 @endforeach
-                <p class="px-6 py-4 text-blue-900 text-large"> Total: {{ count($orders) }} </p>
+                <div class="px-6 text-blue-900 text-large"> Total: {{ count($orders) }} </div>
+                <div class="px-6 text-blue-900 text-large"> Total amount: &euro;  {{ $sum }} </div>
             </tr>
         </tbody>
     </table>

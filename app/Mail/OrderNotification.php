@@ -27,6 +27,7 @@ class OrderNotification extends Mailable
         $this->order = $order;
         $this->paypalLink = env('PAYPAL_LINK');
         $this->tikkieLink = $tikkieLink;
+        $this->order_id = $order->id;
 
     }
 
@@ -40,7 +41,7 @@ class OrderNotification extends Mailable
         $date = date('d-m');
         $restaurant = $this->order['restaurant'];
 
-        $amount = Order::select('amount')->where('bestelling', $this->order->bestelling)->value('amount');
+        $amount = Order::select('amount')->where('id', $this->order->id)->value('amount');
 
         return $this->view('mail.order')->subject("Bevestiging bestelling $date bij $restaurant")->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'))->with([
             'order' => $this->order,

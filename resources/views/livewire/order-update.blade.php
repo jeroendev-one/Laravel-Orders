@@ -3,7 +3,7 @@
         <input type="hidden" wire:model="order_id">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="bestelling">Bestelling:</label>
         <input type="text" class="form-control" wire:model="bestelling" id="bestelling" placeholder="Bestelling">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="restaurant">restaurant</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="restaurant">Restaurant</label>
         <select class="form-control" name="restaurant" id="restaurant" oninvalid="this.setCustomValidity('Choose.')" wire:model="restaurant" placeholder="Restaurant" required>
 
         </select>

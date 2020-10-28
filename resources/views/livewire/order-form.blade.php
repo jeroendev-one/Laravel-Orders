@@ -10,7 +10,6 @@
     @endif
 @endif
 @endforeach
-
     <div class="form-group">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="restaurant">Restaurant</label>
         <select class="form-control" name="restaurant" id="restaurant" oninvalid="this.setCustomValidity('Selecteer het restaurant.')" wire:model="restaurant" required>

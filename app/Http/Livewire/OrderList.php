@@ -83,8 +83,8 @@ class OrderList extends Component
     public function render()
     {
         // Variables
-        $orderDates = Order::distinct('datum')->orderBy('datum', 'DESC')->pluck('datum');
-        $orders = Order::where('datum', 'like', '%'.$this->date.'%')->orderBy('datum', 'DESC')->orderBy('created_at', 'DESC')->get();
+        $orderDates = Order::distinct('datum')->orderBy('created_at', 'DESC')->pluck('datum');
+        $orders = Order::where('datum', 'like', '%'.$this->date.'%')->orderBy('created_at', 'DESC')->get();
 
         if (request()->routeIs('my-orders')) {
             $orders = Order::where('name', Auth::user()->name)->orderBy('created_at', 'DESC')->get();

@@ -23,6 +23,8 @@ class OrderList extends Component
     {
         $this->updateMode = true;
         $order = Order::find($id);
+
+        $this->name = $order->name;
         $this->bestelling = $order->bestelling;
         $this->restaurant = $order->restaurant;
         $this->paid = $order->paid;
@@ -54,6 +56,13 @@ class OrderList extends Component
         $this->resetInputFields();
     }
 
+    public function deleteOrder($id)
+    {
+        $order = Order::find($id);
+
+        Order::where('id', $id)->delete();
+        session()->flash('successMessage', 'Order deleted!');
+    }
     public function cancel()
     {
         $this->updateMode = false;
@@ -62,15 +71,21 @@ class OrderList extends Component
 
     public function render()
     {
-        $orderDates = Order::distinct('datum')->orderBy('datum', 'DESC')->pluck('datum');
-        $orders = Order::where('datum', 'like', '%'.$this->date.'%')->orderBy('datum', 'DESC')->orderBy('created_at', 'DESC')->get();
+        $orderDates = Order::distinct('datum')->orderBy('created_at', 'DESC')->pluck('datum');
+        $restaurants = Order::distinct('restaurant')->where('datum', 'like', '%'.$this->date.'%')->orderBy('restaurant', 'ASC')->pluck('restaurant');
+
+        $orders = Order::where('datum', 'like', '%'.$this->date.'%')->orderBy('datum', 'ASC')->orderBy('restaurant', 'ASC')->get();
 
         $total = Order::where('datum', 'like', '%'.$this->date.'%')->count('amount');
-        
+        $sum = Order::where('datum', 'like', '%'.$this->date.'%')->sum('amount');
+
+
         return view('livewire.admin.order-list', [
             'orders' => $orders,
             'orderDates' => $orderDates,
-            'total' => $total
+            'total' => $total,
+            'sum' => $sum,
+            'restaurants' => $restaurants
         ]);
     }
 }

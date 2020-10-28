@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
        $schedule->command('orders:remindpayments')->weekly();
-       $schedule->command('orders:sendordermail')->friday()->at('16:00');
+       $schedule->command('orders:sendordermail')->fridays()->at('08:45');
     }
 
     /**

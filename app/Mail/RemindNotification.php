@@ -26,6 +26,7 @@ class RemindNotification extends Mailable
 
         $this->order = $order;
         $this->paypalLink = env('PAYPAL_LINK');
+	$this->date = $order->datum;
 
     }
 
@@ -42,7 +43,7 @@ class RemindNotification extends Mailable
         $amount = Order::select('amount')->where('bestelling', $this->order->bestelling)->value('amount');
    	$tikkieLink = Order::select('tikkielink')->where('bestelling', $this->order->bestelling)->value('tikkielink');
 
-        return $this->view('mail.order')->subject("Reminder: Betaling bestelling $date bij $restaurant")->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'))->with([
+        return $this->view('mail.order')->subject("Reminder: Betaling bestelling $this->date bij $restaurant")->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'))->with([
             'order' => $this->order,
             'amount' => $amount,
             'tikkieLink' => $tikkieLink,

@@ -1,12 +1,12 @@
 <form>
-    <div class="form-group">
+    <div class="mb-4 form-group">
         <input type="hidden" wire:model="order_id">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="bestelling">Bestelling:</label>
         <input type="text" class="form-control" wire:model="bestelling" id="bestelling" placeholder="Bestelling">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">Amount:</label>
         <input type="text" class="form-control" wire:model="amount" id="amount" placeholder="Amount">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="tikkielink">Tikke link:</label>
-        <input type="text" class="form-control" wire:model="tikkielink" id="tikkielink" placeholder="Tikkie link" required>
+        <input type="text" required class="form-control" wire:model="tikkielink" id="tikkielink" placeholder="Tikkie link" required>
         <label class="block text-gray-700 text-sm font-bold mb-2" for="paid">Betaald?</label>
         <select class="form-control" name="paid" id="paid" oninvalid="this.setCustomValidity('Paid?')" wire:model="paid" required>
                     <option value="">Choose</option>
